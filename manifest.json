@@ -1,18 +1,11 @@
+JSON
+
 {
-  "name": "ProCam GCam Edition",
+  "name": "ProCam RAW",
   "short_name": "ProCam",
-  "description": "Professional Camera PWA for Android 15",
-  "start_url": "./index.html",
+  "start_url": ".",
   "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#1A1C1E",
-  "theme_color": "#1A1C1E",
-  "icons": [
-    {
-      "src": "icon.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ]
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [{ "src": "icon.png", "sizes": "512x512", "type": "image/png" }]
 }
