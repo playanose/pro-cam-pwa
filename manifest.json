@@ -1,8 +1,6 @@
-JSON
-
 {
-  "name": "ProCam RAW",
-  "short_name": "ProCam",
+  "name": "GCam PWA",
+  "short_name": "GCam",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#000000",
