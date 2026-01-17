@@ -1,9 +1,23 @@
 {
-  "name": "GCam PWA",
-  "short_name": "GCam",
-  "start_url": ".",
-  "display": "standalone",
+  "short_name": "ProCam",
+  "name": "Professional LUT Camera PWA",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "./index.html",
   "background_color": "#000000",
+  "display": "standalone",
+  "scope": "./",
   "theme_color": "#000000",
-  "icons": [{ "src": "icon.png", "sizes": "512x512", "type": "image/png" }]
+  "orientation": "portrait",
+  "description": "High-performance LUT-based professional camera."
 }
