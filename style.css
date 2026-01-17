@@ -1,29 +1,41 @@
-:root { --accent: #ff3b30; --glass: rgba(0, 0, 0, 0.75); }
-body { margin: 0; background: #000; color: white; font-family: -apple-system, sans-serif; overflow: hidden; height: 100vh; }
+body { margin: 0; background: #000; overflow: hidden; font-family: -apple-system, sans-serif; }
 
-.camera-container { position: relative; width: 100vw; height: 100vh; display: flex; flex-direction: column; }
-#camera-preview { width: 100%; height: 100%; object-fit: cover; filter: url(#lut-filter); }
+.camera-container { position: relative; width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; }
 
-/* Visual Shutter Flash */
-.shutter-flash { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: white; opacity: 0; z-index: 100; pointer-events: none; }
-.flash-active { animation: flash-anim 0.1s ease-out; }
-@keyframes flash-anim { 0% { opacity: 1; } 100% { opacity: 0; } }
+#camera-preview { 
+    width: 100%; height: 100%; 
+    object-fit: contain; 
+    filter: url(#gcam-engine); 
+}
 
-.top-bar { position: absolute; top: 0; width: 100%; padding: 60px 20px 20px; z-index: 10; pointer-events: none; }
-.badge { background: var(--accent); padding: 4px 12px; border-radius: 2px; font-weight: 900; font-size: 10px; letter-spacing: 2px; display: inline-block; pointer-events: auto; }
+.shutter-flash { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; opacity: 0; pointer-events: none; z-index: 100; }
+.flash-active { animation: flash-anim 0.15s ease-out; }
+@keyframes flash-anim { from { opacity: 0.9; } to { opacity: 0; } }
 
-.controls-overlay { position: absolute; bottom: 0; width: 100%; background: linear-gradient(to top, rgba(0,0,0,0.95), transparent); padding-bottom: env(safe-area-inset-bottom); z-index: 5; }
+.controls-overlay { 
+    position: absolute; bottom: 0; width: 100%; 
+    background: linear-gradient(transparent, rgba(0,0,0,0.9)); 
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
 .lut-slider-container { overflow-x: auto; padding: 20px 0; scrollbar-width: none; }
-.lut-slider-container::-webkit-scrollbar { display: none; }
 .lut-track { display: flex; gap: 12px; padding: 0 30px; }
 
-.lut-btn { background: var(--glass); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 10px 18px; border-radius: 4px; font-size: 11px; font-weight: bold; backdrop-filter: blur(10px); white-space: nowrap; transition: 0.2s; border-radius: 2px; }
-.lut-btn.leica-special { border-color: rgba(255, 59, 48, 0.5); }
-.lut-btn.active { background: white; color: black; border-color: white; }
-.lut-btn.leica-special.active { background: var(--accent); color: white; border-color: var(--accent); }
+.lut-btn { 
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); 
+    color: #fff; padding: 10px 20px; border-radius: 4px; font-size: 11px; 
+    backdrop-filter: blur(10px); white-space: nowrap; 
+}
+.lut-btn.active { background: #fff; color: #000; border-color: #fff; }
 
 .shutter-row { display: flex; align-items: center; justify-content: space-around; padding: 20px 0 40px; }
-#shutter-btn { width: 75px; height: 75px; background: white; border-radius: 50%; border: 4px solid rgba(255,255,255,0.3); outline: 2px solid white; cursor: pointer; -webkit-tap-highlight-color: transparent; }
-#shutter-btn:active { transform: scale(0.92); }
-.thumb-preview { width: 50px; height: 50px; border-radius: 4px; background: #111; background-size: cover; background-position: center; border: 1px solid rgba(255,255,255,0.3); }
-#switch-cam-btn { background: var(--glass); border: none; padding: 12px; border-radius: 50%; display: flex; align-items: center; }
+#shutter-btn { 
+    width: 72px; height: 72px; background: #fff; border-radius: 50%; 
+    border: 4px solid rgba(255,255,255,0.3); outline: 2px solid #fff; 
+}
+#shutter-btn:active { transform: scale(0.9); }
+
+.thumb-preview { 
+    width: 50px; height: 50px; border-radius: 4px; 
+    background: #111; background-size: cover; border: 1px solid rgba(255,255,255,0.3); 
+}
