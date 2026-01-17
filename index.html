@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>ProCam PWA</title>
+    <title>ProCam Leica</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body>
     <div class="camera-container">
         <div class="top-bar">
-            <div class="badge">PRO</div>
-            <div id="status-info">AF/AE LOCK</div>
+            <div class="badge">LEICA PRO</div>
         </div>
 
         <video id="camera-preview" autoplay playsinline></video>
@@ -21,9 +21,10 @@
             <div class="lut-slider-container">
                 <div class="lut-track">
                     <button class="lut-btn active" onclick="setLUT('NONE')">NATURAL</button>
+                    <button class="lut-btn leica-special" onclick="setLUT('LEICA_VIVID')">L-VIVID</button>
+                    <button class="lut-btn leica-special" onclick="setLUT('LEICA_MONO')">L-MONO</button>
+                    <button class="lut-btn leica-special" onclick="setLUT('LEICA_NATURAL')">L-CLASSIC</button>
                     <button class="lut-btn" onclick="setLUT('KODAK_PORTRA')">PORTRA</button>
-                    <button class="lut-btn" onclick="setLUT('FUJI_VELVIA')">VELVIA</button>
-                    <button class="lut-btn" onclick="setLUT('B_W_PANATOMIC')">B&W</button>
                 </div>
             </div>
 
