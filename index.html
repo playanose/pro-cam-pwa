@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>ProCam 12.5</title>
+    <title>PureCam Pro</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -19,28 +19,24 @@
             <div class="lut-slider-container">
                 <div class="lut-track">
                     <button class="lut-btn active" onclick="setLUT('NONE')">NATURAL</button>
-                    <button class="lut-btn" onclick="setLUT('LEICA_VIVID')">VIVID</button>
-                    <button class="lut-btn" onclick="setLUT('LEICA_MONO')">MONO</button>
-                    <button class="lut-btn" onclick="setLUT('LEICA_NATURAL')">CLASSIC</button>
+                    <button class="lut-btn" onclick="setLUT('VINTAGE')">VINTAGE</button>
+                    <button class="lut-btn" onclick="setLUT('MONO')">MONO</button>
+                    <button class="lut-btn" onclick="setLUT('CLASSIC')">CLASSIC</button>
                 </div>
             </div>
 
             <div class="shutter-row">
                 <div class="thumb-preview" id="gallery-preview"></div>
                 <button id="shutter-btn"></button>
-                <div style="width: 50px;"></div> </div>
+                <button id="switch-btn" onclick="switchCamera()">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="white"><path d="M19 8l-4 4h3c0 3.31-2.69 6-6 6a5.87 5.87 0 01-2.8-.7l-1.46 1.46A7.93 7.93 0 0012 20c4.42 0 8-3.58 8-8h3l-4-4zM5 16l4-4H6c0-3.31 2.69-6 6-6 1.01 0 1.93.25 2.8.7l1.46-1.46A7.93 7.93 0 0012 4c-4.42 0-8 3.58-8 8H1l4 4z"/></svg>
+                </button>
+            </div>
         </div>
     </div>
 
     <svg style="display:none">
-        <filter id="gcam-engine" color-interpolation-filters="sRGB">
-            <feComponentTransfer>
-                <feFuncR type="gamma" amplitude="1.1" exponent="0.8" />
-                <feFuncG type="gamma" amplitude="1.1" exponent="0.8" />
-                <feFuncB type="gamma" amplitude="1.1" exponent="0.8" />
-            </feComponentTransfer>
-            <feConvolveMatrix order="3" kernelMatrix="0 -1 0 -1 5 -1 0 -1 0" preserveAlpha="true" />
-            <feColorMatrix type="saturate" values="1.2" />
+        <filter id="pure-engine">
             <feColorMatrix id="lut-matrix" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0" />
         </filter>
     </svg>
