@@ -10,6 +10,7 @@ let currentStream = null;
 let useFront = false;
 const video = document.getElementById('camera-preview');
 const lutFilter = document.querySelector('#lut-filter feColorMatrix');
+const flash = document.getElementById('flash-overlay');
 
 async function initCamera() {
     if (currentStream) currentStream.getTracks().forEach(t => t.stop());
@@ -19,8 +20,8 @@ async function initCamera() {
             audio: false
         });
         video.srcObject = currentStream;
-        if ('wakeLock' in navigator) await navigator.wakeLock.request('screen');
-    } catch (e) { alert("Camera Error: Please use HTTPS and allow permissions."); }
+        if ('wakeLock' in navigator) await navigator.wakeLock.request('screen').catch(()=>{});
+    } catch (e) { alert("Enable Camera Access via HTTPS"); }
 }
 
 function setLUT(key) {
@@ -28,7 +29,7 @@ function setLUT(key) {
     document.querySelectorAll('.lut-btn').forEach(b => {
         b.classList.toggle('active', b.getAttribute('onclick').includes(key));
     });
-    if (navigator.vibrate) navigator.vibrate(15);
+    if (navigator.vibrate) navigator.vibrate(10);
 }
 
 function switchCamera() {
@@ -37,24 +38,40 @@ function switchCamera() {
     if (navigator.vibrate) navigator.vibrate(30);
 }
 
+function triggerFlash() {
+    flash.classList.remove('flash-active');
+    void flash.offsetWidth; // Force reflow
+    flash.classList.add('flash-active');
+}
+
 async function takePhoto() {
+    triggerFlash();
     if (navigator.vibrate) navigator.vibrate(50);
+
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
+    
+    // Bake the LUT into the image
     ctx.filter = getComputedStyle(video).filter;
     ctx.drawImage(video, 0, 0);
 
-    canvas.toBlob(async (blob) => {
+    canvas.toBlob((blob) => {
         const url = URL.createObjectURL(blob);
+        const fileName = `PRO_LEICA_${Date.now()}.png`;
+
+        // Update UI Thumbnail
         document.getElementById('gallery-preview').style.backgroundImage = `url(${url})`;
-        const file = new File([blob], `LEICA_${Date.now()}.png`, { type: "image/png" });
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            navigator.share({ files: [file] }).catch(() => {});
-        } else {
-            const a = document.createElement('a'); a.href = url; a.download = file.name; a.click();
-        }
+
+        // SILENT AUTO-SAVE
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = fileName;
+        link.click(); // Triggers direct save to downloads
+
+        // Clean up memory
+        setTimeout(() => URL.revokeObjectURL(url), 5000);
     }, 'image/png');
 }
 
